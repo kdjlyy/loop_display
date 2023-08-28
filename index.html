@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <style>
+        #box {
+            width: 950px;
+            height: 290px;
+            margin: 0 auto;
+            background: url("images/1.jpg") no-repeat;
+            background-size: contain;
+            transition: all 1s;
+            position: relative;
+        }
+
+        /* .icon_left 和 .icon_right 点击切换图片 */
+        .icon_left {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 45%;
+            left: 20px;
+        }
+
+        .icon_right {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 45%;
+            right: 20px;
+        }
+    </style>
+
+    <script>
+        var i = 1;  // 表示当前图片所在位置
+        var time = setTimeout("showImg()", 2000);  // 启动时钟事件刷新时间
+        function icon_left() {
+            clearTimeout(time) //清楚时钟事件
+            if (i <= 1) {
+                i = 4;
+            } else {
+                i = i - 2;
+            }
+            showImg()
+        }
+        function icon_right() {
+            clearTimeout(time)  // 清除时钟事件
+            showImg()
+        }
+        function showImg() {  // 让背景图片显示
+            i++;
+            if (i == 5) { // 5表示图片有4张 1\2\3\4\5
+                i = 1;
+            }
+            document.getElementById("box").style.background = "url( images/" + i + ".jpg) no-repeat";
+            document.getElementById("box").style.backgroundSize = "contain";
+            // 通过id获取标签并修改背景样式
+            time = setTimeout("showImg()", 2000);  // 启动时钟事件刷新时间
+        }
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <img class="icon_left" src="images/l.png" onclick="icon_left()">
+        <img class="icon_right" src="images/r.png" onclick="icon_right()">
+    </div>
+</body>
+
+</html>
